@@ -21,43 +21,38 @@ public class Main {
                     String yesNO;
                     do {
                         System.out.println("Introduce uno de los siguientes numeros para hacer la accion corespondiente:\n" +
-                                "1 - Crear contacto con: id, nombre y numero de telefono\n" +
-                                "2 - Crear contacto con: id, nombre, numero de telefono y direccion\n" +
-                                "3 - Crear contacto con: id, nombre, numero de telefono, direccion y email\n" +
-                                "4 - Crear contacto con: id, nombre, numero de telefono y email");
+                                "1 - Crear contacto con: nombre y numero de telefono\n" +
+                                "2 - Crear contacto con: nombre, numero de telefono y direccion\n" +
+                                "3 - Crear contacto con: nombre, numero de telefono, direccion y email\n" +
+                                "4 - Crear contacto con: nombre, numero de telefono y email");
                         int addNumber = lee.nextInt();
-                        int id;
                         String name;
                         String phoneNumbre;
                         String address;
                         String email;
                         if (addNumber == 1) {
-                            id = setId();
                             name = setName();
                             phoneNumbre = setPhoneNamber();
-                            Contact contact = new Contact(id, name, phoneNumbre);
+                            Contact contact = new Contact(-1, name, phoneNumbre);
                             agenda.add(contact);
                         } else if (addNumber == 2) {
-                            id = setId();
                             name = setName();
                             phoneNumbre = setPhoneNamber();
                             address = setAddress();
-                            Contact contact = new Contact(id, name, phoneNumbre, address, null);
+                            Contact contact = new Contact(-1, name, phoneNumbre, address, null);
                             agenda.add(contact);
                         } else if (addNumber == 3) {
-                            id = setId();
                             name = setName();
                             phoneNumbre = setPhoneNamber();
                             address = setAddress();
                             email = setEmail();
-                            Contact contact = new Contact(id, name, phoneNumbre, address, email);
+                            Contact contact = new Contact(-1, name, phoneNumbre, address, email);
                             agenda.add(contact);
                         } else if (addNumber == 4) {
-                            id = setId();
                             name = setName();
                             phoneNumbre = setPhoneNamber();
                             email = setEmail();
-                            Contact contact = new Contact(id, name, phoneNumbre, null, email);
+                            Contact contact = new Contact(-1, name, phoneNumbre, null, email);
                             agenda.add(contact);
                         }
                         System.out.println("Escribe Y para continuar añadiendo o N para dejar de añadir");
@@ -129,13 +124,6 @@ public class Main {
         System.out.println("Escribe el nombre");
         name = lee.next();
         return name;
-    }
-
-    private static int setId() {
-        int id;
-        System.out.println("Escribe el id");
-        id = lee.nextInt();
-        return id;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
