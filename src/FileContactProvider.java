@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class FileContactProvider implements IContactProvider {
     private Scanner lee = new Scanner(System.in);
     private Agenda agenda;
-    private int lastIdContact = 0;
 
     private void order(LinkedList<Contact> contacts) {
         contacts.sort(Comparator.comparing(contact -> contact.getName()));
@@ -23,7 +22,6 @@ public class FileContactProvider implements IContactProvider {
             while (line != null) {
                 String[] partes = line.split(";");
                 contacts.add(new Contact(Integer.parseInt(partes[0]), partes[1], partes[2], partes[3], partes[4]));
-                lastIdContact = Math.max(Integer.parseInt(partes[0]), lastIdContact);
                 line = read.readLine();
             }
             order(contacts);
@@ -102,7 +100,7 @@ public class FileContactProvider implements IContactProvider {
     @Override
     public void saveContacts(LinkedList<Contact> contacts) {
         File file = new File("./resources/contacts.txt");
-        int id = lastIdContact;
+        int id = 0;
         try (PrintWriter writer = new PrintWriter(file)) {
             // BufferedReader read = new BufferedReader(new FileReader(file));
             for (Contact contact : contacts) {
