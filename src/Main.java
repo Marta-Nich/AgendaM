@@ -83,7 +83,39 @@ public class Main {
                     }
                     System.out.print("Escribe el indice del contacto que quieres modificar.\n");
                     int contact = lee.nextInt();
-                    agenda.update(contact);
+                    int number;
+                    do {
+                        System.out.println("Ahora introduce uno de los siguientes numeros para hacer la accion corespondiente:\n" +
+                                "1 - Modificar nombre\n" +
+                                "2 - Modificar telefono\n" +
+                                "3 - Modificar direccion\n" +
+                                "4 - Modificar email\n" +
+                                "0 - Terminar accion");
+                        number = lee.nextInt();
+                        switch (number) {
+                            case 1:
+                                System.out.println("Escribe el nombre");
+//                                contacts.get(index).setName(lee.next());
+                                agenda.search(contact).setName(lee.next());
+                                break;
+                            case 2:
+                                System.out.println("Escribe el telefono");
+//                                contacts.get(index).setPhoneNumber(lee.next());
+                                agenda.search(contact).setPhoneNumber(lee.next());
+                                break;
+                            case 3:
+                                System.out.println("Escribe la direccion");
+//                                contacts.get(index).setAddress(lee.next());
+                                agenda.search(contact).setAddress(lee.next());
+                                break;
+                            case 4:
+                                System.out.println("Escribe el correo");
+//                                contacts.get(index).setEmail(lee.next());
+                                agenda.search(contact).setEmail(lee.next());
+                                break;
+                        }
+                    } while (number != 0);
+                    agenda.update(agenda.search(contact));
                     break;
                 case 4:
                     System.out.println(agenda);

@@ -44,7 +44,7 @@ public class PostgreSQLProvider implements IContactProvider {
     }
 
     @Override
-    public void update(int index) {
+    public void update(Contact contact) {
 
     }
 

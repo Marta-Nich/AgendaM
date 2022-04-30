@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Contact {
     private int id;
 
@@ -59,6 +61,19 @@ public class Contact {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return id == contact.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

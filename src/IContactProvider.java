@@ -7,10 +7,11 @@ public interface IContactProvider {
 
     void remove(int index);
 
-    void update(int index);
+    void update(Contact contact);
 
     void emptyContacts();
 
     void saveContacts(LinkedList<Contact> contacts);
+
     void uploadContact();
 }

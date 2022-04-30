@@ -29,8 +29,8 @@ public class Agenda {
         refresh();
     }
 
-    public void update(int index) throws FileNotFoundException {
-        provider.update(index);
+    public void update(Contact contact) throws FileNotFoundException {
+        provider.update(contact);
         refresh();
     }
 

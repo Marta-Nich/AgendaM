@@ -51,42 +51,12 @@ public class FileContactProvider implements IContactProvider {
     }
 
     @Override
-    public void update(int index) {
+    public void update(Contact contact) {
         LinkedList<Contact> contacts;
         contacts = loadContacts();
-        int number;
-        do {
-            System.out.println("Ahora introduce uno de los siguientes numeros para hacer la accion corespondiente:\n" +
-                    "1 - Modificar nombre\n" +
-                    "2 - Modificar telefono\n" +
-                    "3 - Modificar direccion\n" +
-                    "4 - Modificar email\n" +
-                    "0 - Terminar accion");
-            number = lee.nextInt();
-            switch (number) {
-                case 1:
-                    System.out.println("Escribe el nombre");
-                    contacts.get(index).setName(lee.next());
-//                    agenda.search(index).setName(lee.next());
-                    break;
-                case 2:
-                    System.out.println("Escribe el telefono");
-                    contacts.get(index).setPhoneNumber(lee.next());
-//                    agenda.search(index).setPhoneNumber(lee.next());
-                    break;
-                case 3:
-                    System.out.println("Escribe la direccion");
-                    contacts.get(index).setAddress(lee.next());
-//                    agenda.search(index).setAddress(lee.next());
-                    break;
-                case 4:
-                    System.out.println("Escribe el correo");
-                    contacts.get(index).setEmail(lee.next());
-//                    agenda.search(index).setEmail(lee.next());
-                    break;
-            }
-            saveContacts(contacts);
-        } while (number != 0);
+        contacts.remove(contact);
+        contacts.add(contact);
+        saveContacts(contacts);
     }
 
     @Override
