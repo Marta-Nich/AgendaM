@@ -1,17 +1,17 @@
 import java.util.LinkedList;
 
 public interface IContactProvider {
-    LinkedList<Contact> loadContacts();
+    LinkedList<Contact> loadContacts() throws LoadContactsException;
 
-    void add(Contact contact);
+    void add(Contact contact) throws LoadContactsException;
 
-    void remove(int index);
+    void remove(int index) throws LoadContactsException;
 
-    void update(Contact contact);
+    void update(Contact contact) throws LoadContactsException;
 
-    void emptyContacts();
+    void emptyContacts() throws LoadContactsException;
 
     void saveContacts(LinkedList<Contact> contacts);
 
-    void uploadContact();
+    void uploadContact() throws LoadContactsException;
 }

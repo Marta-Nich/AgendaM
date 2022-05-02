@@ -14,22 +14,22 @@ public class Agenda {
         refresh();
     }
 
-    private void refresh() throws FileNotFoundException {
+    private void refresh() throws LoadContactsException {
         contacts = provider.loadContacts();
         contacts.sort(Comparator.comparing(contact -> contact.getName()));
     }
 
-    public void add(Contact contact) throws FileNotFoundException {
+    public void add(Contact contact) throws LoadContactsException {
         provider.add(contact);
         refresh();
     }
 
-    public void remove(int index) throws FileNotFoundException {
+    public void remove(int index) throws  LoadContactsException {
         provider.remove(index);
         refresh();
     }
 
-    public void update(Contact contact) throws FileNotFoundException {
+    public void update(Contact contact) throws LoadContactsException {
         provider.update(contact);
         refresh();
     }
@@ -47,12 +47,12 @@ public class Agenda {
         return contacts.get(index);
     }
 
-    public void uploadContacts() throws FileNotFoundException {
+    public void uploadContacts() throws LoadContactsException {
         provider.uploadContact();
         refresh();
     }
 
-    public void emptyContacts() throws FileNotFoundException {
+    public void emptyContacts() throws LoadContactsException {
         provider.emptyContacts();
         refresh();
     }

@@ -13,7 +13,7 @@ public class FileContactProvider implements IContactProvider {
     }
 
     @Override
-    public LinkedList<Contact> loadContacts() {
+    public LinkedList<Contact> loadContacts() throws LoadContactsException {
         File file = new File("./resources/contacts.txt");
         LinkedList<Contact> contacts = new LinkedList<>();
         String line;
@@ -26,13 +26,13 @@ public class FileContactProvider implements IContactProvider {
             }
             order(contacts);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new LoadContactsException();
         }
         return contacts;
     }
 
     @Override
-    public void add(Contact contact) {
+    public void add(Contact contact) throws LoadContactsException {
         LinkedList<Contact> contacts;
         contacts = loadContacts();
         contacts.add(contact);
@@ -42,7 +42,7 @@ public class FileContactProvider implements IContactProvider {
     }
 
     @Override
-    public void remove(int index) {
+    public void remove(int index) throws LoadContactsException {
         LinkedList<Contact> contacts;
         contacts = loadContacts();
         contacts.remove(contacts.get(index));
@@ -51,7 +51,7 @@ public class FileContactProvider implements IContactProvider {
     }
 
     @Override
-    public void update(Contact contact) {
+    public void update(Contact contact) throws LoadContactsException {
         LinkedList<Contact> contacts;
         contacts = loadContacts();
         contacts.remove(contact);
@@ -60,7 +60,7 @@ public class FileContactProvider implements IContactProvider {
     }
 
     @Override
-    public void emptyContacts() {
+    public void emptyContacts() throws LoadContactsException {
         LinkedList<Contact> contacts;
         contacts = loadContacts();
         contacts.clear();
@@ -85,7 +85,7 @@ public class FileContactProvider implements IContactProvider {
     }
 
     @Override
-    public void uploadContact() {
+    public void uploadContact() throws LoadContactsException {
         LinkedList<Contact> contacts;
         contacts = loadContacts();
         Contact ana = new Contact(0, "Ana", "999888777", "C/ del Grevol");

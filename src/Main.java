@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static Scanner lee = new Scanner(System.in);
 
-    public static void menuAgenda(Agenda agenda) throws FileNotFoundException {
+    public static void menuAgenda(Agenda agenda) throws LoadContactsException {
         int action;
         do {
             System.out.println("Introduce uno de los siguientes numeros para hacer la accion corespondiente:\n" +
@@ -158,7 +158,7 @@ public class Main {
         return name;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, LoadContactsException {
 //        menuAgenda(new Agenda(new HardcodedContactProvider()));
         menuAgenda(new Agenda(new FileContactProvider()));
 /*

@@ -9,7 +9,7 @@ import java.util.List;
 public class PostgreSQLProvider implements IContactProvider {
     Connection con = null;
 
-    public PostgreSQLProvider() {
+    public PostgreSQLProvider() throws LoadContactsException {
         try {
             String url = "jdbc:postgresql://89.36.214.106:5432/geo_1cfsy_6960g";
             String usuari = "geo_1cfsy_6960g";
@@ -24,7 +24,7 @@ public class PostgreSQLProvider implements IContactProvider {
             Statement st = con.createStatement();
             st.executeUpdate(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new LoadContactsException();
         }
     }
 
