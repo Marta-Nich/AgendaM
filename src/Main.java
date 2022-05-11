@@ -160,8 +160,15 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, LoadContactsException {
 //        menuAgenda(new Agenda(new HardcodedContactProvider()));
-        menuAgenda(new Agenda(new FileContactProvider()));
-/*
+//        menuAgenda(new Agenda(new FileContactProvider()));
+        menuAgenda(new Agenda(new SerializableContactProvider()));
+
+
+
+
+
+
+        /*
 0;Pepe;123456789;C/Bonita;pepe@gmail.com
 1;Maria;123456789;C/Bonita;pepe@gmail.com
 */

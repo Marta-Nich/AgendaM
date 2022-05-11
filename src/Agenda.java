@@ -9,7 +9,7 @@ public class Agenda {
     private LinkedList<Contact> contacts = new LinkedList<>();
     private IContactProvider provider;
 
-    public Agenda(IContactProvider provider) throws FileNotFoundException {
+    public Agenda(IContactProvider provider) throws  LoadContactsException {
         this.provider = provider;
         refresh();
     }
