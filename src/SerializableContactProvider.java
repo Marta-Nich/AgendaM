@@ -16,7 +16,6 @@ public class SerializableContactProvider implements IContactProvider {
     public LinkedList<Contact> loadContacts() throws LoadContactsException {
         File file = new File("./resources/contactosSerializados.obj");
         LinkedList<Contact> contacts = new LinkedList<>();
-        String line;
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file.getAbsoluteFile()))) {
             while (true) {
                 contacts.add((Contact) inputStream.readObject());
