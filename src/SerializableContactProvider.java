@@ -66,13 +66,10 @@ public class SerializableContactProvider implements IContactProvider {
     @Override
     public void saveContacts(LinkedList<Contact> contacts) {
         File file = new File("./resources/contactosSerializados.obj");
-        int id = 0;
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             for (Contact contact : contacts) {
                 objectOutputStream.writeObject(contact);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

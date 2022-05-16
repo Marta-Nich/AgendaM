@@ -1,13 +1,17 @@
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class GsonDataProvider implements IContactProvider {
     private Scanner lee = new Scanner(System.in);
     private Agenda agenda;
+    private Gson gson = new Gson();
 
     private void order(LinkedList<Contact> contacts) {
         contacts.sort(Comparator.comparing(contact -> contact.getName()));
@@ -18,12 +22,12 @@ public class GsonDataProvider implements IContactProvider {
     public LinkedList<Contact> loadContacts() throws LoadContactsException {
         File file = new File("./resources/contactosGson.json");
         LinkedList<Contact> contacts = new LinkedList<>();
-        Gson gson = new Gson();
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file.getAbsoluteFile()))) {
-            while (true) {
-                Contact contact;
-                contact = gson.fromJson(String.valueOf(inputStream), Contact.class);
-                contacts.add(contact);
+        try (FileReader reader = new FileReader(file.getAbsoluteFile())) {
+            Type list = new TypeToken<List<Contact>>() {
+            }.getType();
+            contacts = gson.fromJson(reader, list);
+            if (contacts == null) {
+                contacts = new LinkedList<>();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,11 +75,8 @@ public class GsonDataProvider implements IContactProvider {
         File file = new File("./resources/contactosGson.json");
         int id = 0;
         String contGson;
-        Gson gson = new Gson();
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
-            for (Contact contact : contacts) {
-                contGson = gson.toJson(contact);
-            }
+        try (FileWriter writer = new FileWriter(file)) {
+            contGson = gson.toJson(contacts);
         } catch (IOException e) {
             e.printStackTrace();
         }

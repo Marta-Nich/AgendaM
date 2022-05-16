@@ -9,7 +9,7 @@ public class Agenda {
     private LinkedList<Contact> contacts = new LinkedList<>();
     private IContactProvider provider;
 
-    public Agenda(IContactProvider provider) throws  LoadContactsException {
+    public Agenda(IContactProvider provider) throws LoadContactsException {
         this.provider = provider;
         refresh();
     }
@@ -24,7 +24,7 @@ public class Agenda {
         refresh();
     }
 
-    public void remove(int index) throws  LoadContactsException {
+    public void remove(int index) throws LoadContactsException {
         provider.remove(index);
         refresh();
     }
