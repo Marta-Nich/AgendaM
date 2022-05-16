@@ -3,8 +3,9 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
 
-public class SerializableContactProvider implements IContactProvider {
+public class GsonDataProvider implements IContactProvider {
     private Scanner lee = new Scanner(System.in);
     private Agenda agenda;
 
@@ -12,17 +13,19 @@ public class SerializableContactProvider implements IContactProvider {
         contacts.sort(Comparator.comparing(contact -> contact.getName()));
     }
 
+
     @Override
     public LinkedList<Contact> loadContacts() throws LoadContactsException {
-        File file = new File("./resources/contactosSerializados.obj");
+        File file = new File("./resources/contactosGson.json");
         LinkedList<Contact> contacts = new LinkedList<>();
+        Gson gson = new Gson();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file.getAbsoluteFile()))) {
             while (true) {
-                contacts.add((Contact) inputStream.readObject());
+                Contact contact;
+                contact = gson.fromJson(String.valueOf(inputStream), Contact.class);
+                contacts.add(contact);
             }
-        } catch (EOFException ignored) {
-
-        } catch (ClassNotFoundException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return contacts;
@@ -65,14 +68,14 @@ public class SerializableContactProvider implements IContactProvider {
 
     @Override
     public void saveContacts(LinkedList<Contact> contacts) {
-        File file = new File("./resources/contactosSerializados.obj");
+        File file = new File("./resources/contactosGson.json");
         int id = 0;
+        String contGson;
+        Gson gson = new Gson();
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             for (Contact contact : contacts) {
-                objectOutputStream.writeObject(contact);
+                contGson = gson.toJson(contact);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
