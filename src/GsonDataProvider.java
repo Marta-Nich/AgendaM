@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 public class GsonDataProvider implements IContactProvider {
@@ -22,9 +23,9 @@ public class GsonDataProvider implements IContactProvider {
     public LinkedList<Contact> loadContacts() throws LoadContactsException {
         File file = new File("./resources/contactosGson.json");
         LinkedList<Contact> contacts = new LinkedList<>();
+        Type list = new TypeToken<LinkedList<Contact>>() {
+        }.getType();
         try (FileReader reader = new FileReader(file.getAbsoluteFile())) {
-            Type list = new TypeToken<List<Contact>>() {
-            }.getType();
             contacts = gson.fromJson(reader, list);
             if (contacts == null) {
                 contacts = new LinkedList<>();
@@ -73,10 +74,10 @@ public class GsonDataProvider implements IContactProvider {
     @Override
     public void saveContacts(LinkedList<Contact> contacts) {
         File file = new File("./resources/contactosGson.json");
-        int id = 0;
-        String contGson;
+        final Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
+        final String prettyPrinting = prettyGson.toJson(contacts);
         try (FileWriter writer = new FileWriter(file)) {
-            contGson = gson.toJson(contacts);
+            writer.write(prettyPrinting);
         } catch (IOException e) {
             e.printStackTrace();
         }
